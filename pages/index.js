@@ -14,7 +14,7 @@ function Home({ profile, links }) {
         <title>Raíza Souto | Links</title>
         <meta
           name="description"
-          value="Aqui você encontra todos os links para estarmos sempre juntos!"
+          content="Aqui você encontra todos os links para estarmos sempre juntos!"
         />
       </Head>
       <GlobalStyle />
