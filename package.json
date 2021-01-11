@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "generate": "plop --plopfile generators/plopfile.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
@@ -17,6 +18,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-react-hooks": "^4.0.8",
+    "plop": "^2.7.4",
     "prettier": "^2.2.1"
   }
 }
