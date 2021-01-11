@@ -11,17 +11,17 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'add',
-        path: '../../src/components/{{pascalCase name}}/index.jsx',
+        path: '../components/{{pascalCase name}}/index.jsx',
         templateFile: 'templates/Component.jsx.hbs',
       },
       {
         type: 'add',
-        path: '../../src/components/{{pascalCase name}}/styles.js',
+        path: '../components/{{pascalCase name}}/styles.js',
         templateFile: 'templates/styled.js.hbs',
       },
       {
         type: 'add',
-        path: '../../src/components/{{pascalCase name}}/stories.js',
+        path: '../components/{{pascalCase name}}/stories.js',
         templateFile: 'templates/stories.js.hbs',
       },
     ],
