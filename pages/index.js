@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import Head from 'next/head';
 
 import { GlobalStyle } from '../styles/globalStyles';
 import Profile from '../components/Profile';
@@ -9,6 +10,13 @@ import { query } from '../services/graphql';
 function Home({ profile, links }) {
   return (
     <>
+      <Head>
+        <title>Raíza Souto | Links</title>
+        <meta
+          name="description"
+          value="Aqui você encontra todos os links para estarmos sempre juntos!"
+        />
+      </Head>
       <GlobalStyle />
       <Profile {...profile} />
       <Links links={links} />
