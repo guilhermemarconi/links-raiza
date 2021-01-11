@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 
 const client = new ApolloClient({
   link: PrismicLink({
-    uri: 'https://linksraiza.prismic.io/graphql',
+    uri: `https://${process.env.PRISMIC_REPOSITORY}.prismic.io/graphql`,
   }),
   cache: new InMemoryCache(),
 });
