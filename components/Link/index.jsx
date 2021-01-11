@@ -5,11 +5,16 @@ import * as S from './styles';
 function Link({ title, url, thumbnail }) {
   return (
     <S.Wrapper>
-      {thumbnail ? (
-        <S.Thumb src={thumbnail.url} alt={thumbnail.alt || ''} />
-      ) : null}
+      <S.Anchor
+        href={url}
+        hasthumb={!!thumbnail}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {thumbnail ? (
+          <S.Thumb src={thumbnail.url} alt={thumbnail.alt || ''} />
+        ) : null}
 
-      <S.Anchor href={url} target="_blank" rel="noopener noreferrer">
         {title}
       </S.Anchor>
     </S.Wrapper>

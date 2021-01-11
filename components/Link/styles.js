@@ -18,6 +18,7 @@ export const Anchor = styled.a`
 
 export const Thumb = styled.img`
   display: block;
-  width: 100%;
+  width: calc(100% + 2em);
   height: auto;
+  transform: translate(-1em, -1em);
 `;

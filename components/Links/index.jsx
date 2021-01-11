@@ -1,38 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-import { query } from '../../services/graphql';
 import Link from '../Link';
 import * as S from './styles';
 
-function Links() {
-  const [links, setLinks] = useState([]);
-
-  useEffect(() => {
-    query(`
-      {
-        allLinks {
-          edges {
-            node {
-              links {
-                thumbnail
-                title
-                url
-              }
-            }
-          }
-        }
-      }
-    `)
-      .then((content) => {
-        try {
-          setLinks(content.data.allLinks.edges[0].node.links || []);
-        } catch (error) {
-          console.error(error);
-        }
-      })
-      .catch(console.error);
-  }, []);
-
+function Links({ links }) {
   if (!links || !links.length) return null;
 
   return (
@@ -43,5 +14,27 @@ function Links() {
     </S.Wrapper>
   );
 }
+
+Links.propTypes = {
+  links: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+      thumbnail: PropTypes.exact({
+        url: PropTypes.string,
+        alt: PropTypes.string,
+        copyright: PropTypes.string,
+        dimensions: PropTypes.exact({
+          width: PropTypes.number,
+          height: PropTypes.number,
+        }),
+      }),
+    })
+  ),
+};
+
+Links.defaultProps = {
+  links: [],
+};
 
 export default Links;
