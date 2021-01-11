@@ -1,5 +1,15 @@
+import { GlobalStyle } from '../styles/globalStyles';
+import Profile from '../components/Profile';
+import Links from '../components/Links';
+
 function Home() {
-  return <h1>Hello, World!</h1>;
+  return (
+    <>
+      <GlobalStyle />
+      <Profile />
+      <Links />
+    </>
+  );
 }
 
 export default Home;
