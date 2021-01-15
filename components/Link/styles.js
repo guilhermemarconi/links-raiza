@@ -8,12 +8,12 @@ export const Wrapper = styled.li`
 export const Anchor = styled.a`
   display: block;
   padding: 1em;
-  color: white;
+  color: ${({ colorText }) => colorText};
   font-weight: bold;
   text-align: center;
   text-decoration: none;
   border-radius: 0.1875rem;
-  background: #222;
+  background: ${({ colorBackground }) => colorBackground};
 `;
 
 export const Thumb = styled.img`

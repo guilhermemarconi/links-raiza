@@ -7,7 +7,7 @@ import Links from '../components/Links';
 
 import { query } from '../services/graphql';
 
-function Home({ profile, links }) {
+function Home({ profile, links, layout }) {
   return (
     <>
       <Head>
@@ -17,9 +17,16 @@ function Home({ profile, links }) {
           content="Aqui você encontra todos os links para estarmos sempre juntos!"
         />
       </Head>
-      <GlobalStyle />
+      <GlobalStyle
+        backgroundImage={layout.page_background_image?.url}
+        backgroundColor={layout.page_background_color}
+      />
       <Profile {...profile} />
-      <Links links={links} />
+      <Links
+        links={links}
+        linksColorText={layout.links_color_text}
+        linksColorBackground={layout.links_color_background}
+      />
     </>
   );
 }
@@ -27,6 +34,7 @@ function Home({ profile, links }) {
 Home.propTypes = {
   profile: PropTypes.object,
   links: PropTypes.array,
+  layout: PropTypes.object,
 };
 
 export default Home;
@@ -54,6 +62,16 @@ export async function getStaticProps() {
             }
           }
         }
+        allLayouts {
+          edges {
+            node {
+              page_background_image
+              page_background_color
+              links_color_background
+              links_color_text
+            }
+          }
+        }
       }
     `);
 
@@ -61,6 +79,7 @@ export async function getStaticProps() {
       props: {
         profile: content.data.allProfiles.edges[0].node,
         links: content.data.allLinks.edges[0].node.links,
+        layout: content.data.allLayouts.edges[0].node,
       },
     };
   } catch (error) {
