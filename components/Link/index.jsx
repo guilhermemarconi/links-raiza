@@ -2,19 +2,35 @@ import PropTypes from 'prop-types';
 
 import * as S from './styles';
 
-function Link({ title, url, thumbnail, colorText, colorBackground }) {
+function Link({
+  title,
+  url,
+  thumbnailUrl,
+  thumbnailAlt,
+  thumbnailWidth,
+  thumbnailHeight,
+  colorText,
+  colorBackground,
+}) {
+  if (!title && !url) return null;
+
   return (
     <S.Wrapper>
       <S.Anchor
         href={url}
-        hasthumb={!!thumbnail}
+        hasthumb={!!thumbnailUrl}
         target="_blank"
         rel="noopener noreferrer"
         colorText={colorText}
         colorBackground={colorBackground}
       >
-        {thumbnail ? (
-          <S.Thumb src={thumbnail.url} alt={thumbnail.alt || ''} />
+        {thumbnailUrl ? (
+          <S.Thumb
+            src={thumbnailUrl}
+            alt={thumbnailAlt || ''}
+            width={thumbnailWidth}
+            height={thumbnailHeight}
+          />
         ) : null}
 
         {title}
@@ -26,17 +42,17 @@ function Link({ title, url, thumbnail, colorText, colorBackground }) {
 Link.propTypes = {
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  thumbnail: PropTypes.shape({
-    url: PropTypes.string,
-    alt: PropTypes.string,
-    copyright: PropTypes.string,
-    dimensions: PropTypes.exact({
-      width: PropTypes.number,
-      height: PropTypes.number,
-    }),
-  }),
-  colorText: PropTypes.string,
-  colorBackground: PropTypes.string,
+  thumbnailUrl: PropTypes.string,
+  thumbnailAlt: PropTypes.string,
+  thumbnailWidth: PropTypes.number,
+  thumbnailHeight: PropTypes.number,
+  colorText: PropTypes.string.isRequired,
+  colorBackground: PropTypes.string.isRequired,
+};
+
+Link.defaultProps = {
+  colorText: '#fff',
+  colorBackground: '#222',
 };
 
 export default Link;

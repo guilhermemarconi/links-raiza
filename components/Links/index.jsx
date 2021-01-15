@@ -11,7 +11,10 @@ function Links({ links, linksColorText, linksColorBackground }) {
       {links.map(({ thumbnail, title, url }, index) => (
         <Link
           key={index}
-          thumbnail={thumbnail}
+          thumbnailUrl={thumbnail?.url}
+          thumbnailAlt={thumbnail?.alt}
+          thumbnailWidth={thumbnail?.dimensions?.width}
+          thumbnailHeight={thumbnail?.dimensions?.height}
           title={title}
           url={url}
           colorText={linksColorText}
@@ -27,11 +30,11 @@ Links.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
-      thumbnail: PropTypes.exact({
+      thumbnail: PropTypes.shape({
         url: PropTypes.string,
         alt: PropTypes.string,
         copyright: PropTypes.string,
-        dimensions: PropTypes.exact({
+        dimensions: PropTypes.shape({
           width: PropTypes.number,
           height: PropTypes.number,
         }),
@@ -44,8 +47,6 @@ Links.propTypes = {
 
 Links.defaultProps = {
   links: [],
-  linksColorText: '#fff',
-  linksColorBackground: '#222',
 };
 
 export default Links;
