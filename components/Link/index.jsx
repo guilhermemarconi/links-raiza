@@ -27,7 +27,7 @@ function Link({
         {thumbnailUrl ? (
           <S.Thumb
             src={thumbnailUrl}
-            alt={thumbnailAlt || ''}
+            alt={thumbnailAlt}
             width={thumbnailWidth}
             height={thumbnailHeight}
           />
@@ -51,6 +51,7 @@ Link.propTypes = {
 };
 
 Link.defaultProps = {
+  thumbnailAlt: '',
   colorText: '#fff',
   colorBackground: '#222',
 };
