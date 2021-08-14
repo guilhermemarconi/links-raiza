@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
@@ -18,20 +18,18 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    max-width: 43.75rem;
-    margin: 0 auto !important;
-    padding: 1.875rem;
-    ${({ backgroundImage, backgroundColor }) => `
-        ${
-          backgroundImage &&
-          `
-            background-image: url(${backgroundImage});
-            background-position: center;
-            background-size: cover;
-            background-attachment: fixed;
-          `
-        }
-        ${backgroundColor && `background-color: ${backgroundColor};`}
+    ${({ backgroundImage, backgroundColor }) => css`
+      max-width: 43.75rem;
+      margin: 0 auto !important;
+      padding: 1.875rem;
+      ${!!backgroundImage &&
+      `
+        background-image: url(${backgroundImage});
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
+      `}
+      ${!!backgroundColor && `background-color: ${backgroundColor};`}
     `}
   }
 `;
