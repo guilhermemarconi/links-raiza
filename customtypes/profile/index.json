@@ -1,0 +1,37 @@
+{
+  "id": "profile",
+  "label": "Perfil",
+  "repeatable": false,
+  "json": {
+    "Main": {
+      "instagram_profile": {
+        "type": "Text",
+        "config": {
+          "label": "@ do Instagram"
+        }
+      },
+      "profile_image": {
+        "type": "Image",
+        "config": {
+          "constraint": {
+            "width": 300,
+            "height": 300
+          },
+          "thumbnails": [],
+          "label": "Foto de perfil"
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,strong,em",
+          "allowTargetBlank": true,
+          "label": "Descrição"
+        }
+      }
+    }
+  },
+  "hash": "6bb266ce9386024dd7e8b09935b7e656",
+  "status": true,
+  "format": "custom"
+}

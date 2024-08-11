@@ -1,0 +1,50 @@
+{
+  "id": "link",
+  "label": "Link",
+  "repeatable": false,
+  "json": {
+    "Main": {
+      "doc_title": {
+        "type": "Text",
+        "config": {
+          "label": "Título do documento (ignorar)",
+          "placeholder": "Links"
+        }
+      },
+      "links": {
+        "type": "Group",
+        "config": {
+          "fields": {
+            "thumbnail": {
+              "type": "Image",
+              "config": {
+                "constraint": {
+                  "width": 676
+                },
+                "thumbnails": [],
+                "label": "Imagem"
+              }
+            },
+            "title": {
+              "type": "Text",
+              "config": {
+                "label": "Título"
+              }
+            },
+            "url": {
+              "type": "Text",
+              "config": {
+                "label": "URL do link",
+                "placeholder": "https://"
+              }
+            }
+          },
+          "label": "Links"
+        }
+      }
+    }
+  },
+  "hash": "f1f242c9b98f42117295fc96cd604115",
+  "status": true,
+  "format": "custom"
+}

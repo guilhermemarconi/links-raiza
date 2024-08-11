@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import ProfilePicture from '../ProfilePicture';
 import ProfileDescription from '../ProfileDescription';
 import * as S from './styles';
@@ -17,24 +15,5 @@ function Profile({ profile_image, description }) {
     </S.Wrapper>
   );
 }
-
-Profile.propTypes = {
-  profile_image: PropTypes.exact({
-    url: PropTypes.string,
-    alt: PropTypes.string,
-    copyright: PropTypes.string,
-    dimensions: PropTypes.exact({
-      width: PropTypes.number,
-      height: PropTypes.number,
-    }),
-  }),
-  description: PropTypes.arrayOf(
-    PropTypes.exact({
-      type: PropTypes.string,
-      text: PropTypes.string,
-      spans: PropTypes.array,
-    })
-  ),
-};
 
 export default Profile;

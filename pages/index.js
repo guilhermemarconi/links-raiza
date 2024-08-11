@@ -1,13 +1,12 @@
-import PropTypes from 'prop-types';
 import Head from 'next/head';
 
 import { GlobalStyle } from '../styles/globalStyles';
 import Profile from '../components/Profile';
 import Links from '../components/Links';
+import { getAllData } from '../services/prismic';
+import { createClient } from '../prismicio';
 
-import { query } from '../services/graphql';
-
-function Home({ profile, links, layout }) {
+function Home({ layout, links, profile }) {
   return (
     <>
       <Head>
@@ -31,57 +30,19 @@ function Home({ profile, links, layout }) {
   );
 }
 
-Home.propTypes = {
-  profile: PropTypes.object,
-  links: PropTypes.array,
-  layout: PropTypes.object,
-};
-
 export default Home;
 
-export async function getStaticProps() {
+export async function getStaticProps({ previewData }) {
+  const client = createClient({ previewData })
   try {
-    const content = await query(`
-      {
-        allProfiles {
-          edges {
-            node {
-              profile_image
-              description
-            }
-          }
-        }
-        allLinks {
-          edges {
-            node {
-              links {
-                thumbnail
-                title
-                url
-              }
-            }
-          }
-        }
-        allLayouts {
-          edges {
-            node {
-              page_background_image
-              page_background_color
-              links_color_background
-              links_color_text
-            }
-          }
-        }
-      }
-    `);
-
+    const { layout, link, profile } = await getAllData(client);
     return {
       props: {
-        profile: content.data.allProfiles.edges[0].node,
-        links: content.data.allLinks.edges[0].node.links,
-        layout: content.data.allLayouts.edges[0].node,
-      },
-    };
+        layout: layout[0].data,
+        profile: profile[0].data,
+        links: link[0].data.links,
+      }
+    }
   } catch (error) {
     console.error(error);
   }

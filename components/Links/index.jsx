@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import Link from '../Link';
 import * as S from './styles';
 
@@ -24,29 +22,5 @@ function Links({ links, linksColorText, linksColorBackground }) {
     </S.Wrapper>
   );
 }
-
-Links.propTypes = {
-  links: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      thumbnail: PropTypes.shape({
-        url: PropTypes.string,
-        alt: PropTypes.string,
-        copyright: PropTypes.string,
-        dimensions: PropTypes.shape({
-          width: PropTypes.number,
-          height: PropTypes.number,
-        }),
-      }),
-    })
-  ),
-  linksColorText: PropTypes.string,
-  linksColorBackground: PropTypes.string,
-};
-
-Links.defaultProps = {
-  links: [],
-};
 
 export default Links;
