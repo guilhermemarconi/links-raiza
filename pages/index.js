@@ -1,5 +1,7 @@
 import Head from 'next/head';
 
+import { PrismicPreview } from '@prismicio/next';
+
 import { GlobalStyle } from '../styles/globalStyles';
 import Profile from '../components/Profile';
 import Links from '../components/Links';
@@ -26,6 +28,7 @@ function Home({ layout, links, profile }) {
         linksColorText={layout.links_color_text}
         linksColorBackground={layout.links_color_background}
       />
+      <PrismicPreview repositoryName='linksraiza' />
     </>
   );
 }
