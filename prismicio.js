@@ -1,5 +1,5 @@
-import * as prismic from '@prismicio/client';
-import * as prismicNext from '@prismicio/next';
+import { createClient as baseCreateClient } from '@prismicio/client';
+import { enableAutoPreviews } from '@prismicio/next';
 import config from './slicemachine.config.json';
 
 /**
@@ -35,16 +35,16 @@ const routes = [
  * @param {prismicNext.CreateClientConfig} config - Configuration for the Prismic client.
  */
 export const createClient = (config = {}) => {
-  const client = prismic.createClient(repositoryName, {
+  const client = baseCreateClient(repositoryName, {
     routes,
+    fetchOptions:
+      process.env.NODE_ENV === "production"
+        ? { next: { tags: ["prismic"] }, cache: "force-cache" }
+        : { next: { revalidate: 5 } },
     ...config,
   });
 
-  prismicNext.enableAutoPreviews({
-    client,
-    previewData: config.previewData,
-    req: config.req,
-  });
+  enableAutoPreviews({ client });
 
   return client;
 };

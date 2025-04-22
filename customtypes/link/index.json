@@ -2,6 +2,8 @@
   "id": "link",
   "label": "Link",
   "repeatable": false,
+  "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "doc_title": {
@@ -18,11 +20,12 @@
             "thumbnail": {
               "type": "Image",
               "config": {
+                "label": "Imagem",
                 "constraint": {
-                  "width": 676
+                  "width": 300,
+                  "height": 300
                 },
-                "thumbnails": [],
-                "label": "Imagem"
+                "thumbnails": []
               }
             },
             "title": {
@@ -43,8 +46,5 @@
         }
       }
     }
-  },
-  "hash": "f1f242c9b98f42117295fc96cd604115",
-  "status": true,
-  "format": "custom"
+  }
 }

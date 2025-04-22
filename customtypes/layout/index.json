@@ -2,7 +2,6 @@
   "id": "layout",
   "label": "Layout",
   "repeatable": false,
-  "hash": "5f8b41c2c85114be5ba682106417acab",
   "status": true,
   "format": "custom",
   "json": {
@@ -11,20 +10,6 @@
         "type": "Text",
         "config": {
           "label": "Título (deixa como está)"
-        }
-      },
-      "page_background_image": {
-        "type": "Image",
-        "config": {
-          "constraint": {},
-          "thumbnails": [],
-          "label": "Imagem de fundo da página"
-        }
-      },
-      "page_background_color": {
-        "type": "Color",
-        "config": {
-          "label": "Cor de fundo da página"
         }
       },
       "links_color_background": {

@@ -2,8 +2,17 @@
   "id": "profile",
   "label": "Perfil",
   "repeatable": false,
+  "status": true,
+  "format": "custom",
   "json": {
     "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Título",
+          "placeholder": "Raíza Souto"
+        }
+      },
       "instagram_profile": {
         "type": "Text",
         "config": {
@@ -24,14 +33,12 @@
       "description": {
         "type": "StructuredText",
         "config": {
-          "multi": "paragraph,strong,em",
+          "label": "Descrição",
+          "placeholder": "",
           "allowTargetBlank": true,
-          "label": "Descrição"
+          "multi": "paragraph,strong,em,heading2,heading3"
         }
       }
     }
-  },
-  "hash": "6bb266ce9386024dd7e8b09935b7e656",
-  "status": true,
-  "format": "custom"
+  }
 }

@@ -1,6 +1,12 @@
 {
   "repositoryName": "linksraiza",
-  "adapter": "@slicemachine/adapter-next",
+  "adapter": {
+    "resolve": "@slicemachine/adapter-next",
+    "options": {
+      "typescript": false,
+      "jsxExtension": true
+    }
+  },
   "libraries": ["./slices"],
   "localSliceSimulatorURL": "http://localhost:3000/slice-simulator"
 }

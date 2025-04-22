@@ -1,10 +1,7 @@
-import * as S from './styles';
-
 function Link({
   title,
   url,
   thumbnailUrl,
-  thumbnailAlt,
   thumbnailWidth,
   thumbnailHeight,
   colorText,
@@ -13,27 +10,29 @@ function Link({
   if (!title && !url) return null;
 
   return (
-    <S.Wrapper>
-      <S.Anchor
+    <li className="block my-5">
+      <a
         href={url}
-        $hasthumb={!!thumbnailUrl}
         target="_blank"
         rel="noopener noreferrer"
-        $colorText={colorText}
-        $colorBackground={colorBackground}
+        className="@container/link flex items-center p-4 font-bold rounded-lg bg-foreground text-background"
       >
+        <span className="flex-1 pr-4">
+          {title}
+        </span>
+
         {thumbnailUrl ? (
-          <S.Thumb
+          <img
             src={thumbnailUrl}
-            alt={thumbnailAlt}
+            alt=""
             width={thumbnailWidth}
             height={thumbnailHeight}
+            className="hidden size-16 rounded-md @min-[200px]:block"
+            role="presentation"
           />
         ) : null}
-
-        {title}
-      </S.Anchor>
-    </S.Wrapper>
+      </a>
+    </li>
   );
 }
 

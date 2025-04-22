@@ -20,28 +20,6 @@ interface LayoutDocumentData {
   document_title: prismic.KeyTextField;
 
   /**
-   * Imagem de fundo da página field in *Layout*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: layout.page_background_image
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  page_background_image: prismic.ImageField<never>;
-
-  /**
-   * Cor de fundo da página field in *Layout*
-   *
-   * - **Field Type**: Color
-   * - **Placeholder**: *None*
-   * - **API ID Path**: layout.page_background_color
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#color
-   */
-  page_background_color: prismic.ColorField;
-
-  /**
    * Cor do fundo dos links field in *Layout*
    *
    * - **Field Type**: Color
@@ -159,6 +137,17 @@ export type LinkDocument<Lang extends string = string> =
  */
 interface ProfileDocumentData {
   /**
+   * Título field in *Perfil*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Raíza Souto
+   * - **API ID Path**: profile.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
    * @ do Instagram field in *Perfil*
    *
    * - **Field Type**: Text
@@ -210,39 +199,23 @@ export type ProfileDocument<Lang extends string = string> =
 
 export type AllDocumentTypes = LayoutDocument | LinkDocument | ProfileDocument;
 
-/**
- * Default variation for Teste Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TesteSliceDefault = prismic.SharedSliceVariation<
-  'default',
-  Record<string, never>,
-  never
->;
-
-/**
- * Slice variation for *Teste*
- */
-type TesteSliceVariation = TesteSliceDefault;
-
-/**
- * Teste Shared Slice
- *
- * - **API ID**: `teste`
- * - **Description**: Teste
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TesteSlice = prismic.SharedSlice<'teste', TesteSliceVariation>;
-
 declare module '@prismicio/client' {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
       options?: prismic.ClientConfig
     ): prismic.Client<AllDocumentTypes>;
+  }
+
+  interface CreateWriteClient {
+    (
+      repositoryNameOrEndpoint: string,
+      options: prismic.WriteClientConfig
+    ): prismic.WriteClient<AllDocumentTypes>;
+  }
+
+  interface CreateMigration {
+    (): prismic.Migration<AllDocumentTypes>;
   }
 
   namespace Content {
@@ -255,9 +228,6 @@ declare module '@prismicio/client' {
       ProfileDocument,
       ProfileDocumentData,
       AllDocumentTypes,
-      TesteSlice,
-      TesteSliceVariation,
-      TesteSliceDefault,
     };
   }
 }
