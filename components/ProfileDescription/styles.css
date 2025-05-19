@@ -1,0 +1,9 @@
+@reference "../../app/globals.css";
+
+@layer components {
+  .description p {
+    @apply my-4 text-pretty;
+  }
+
+  .description a {}
+}

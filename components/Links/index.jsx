@@ -13,8 +13,6 @@ function Links({ links, linksColorText, linksColorBackground }) {
           thumbnailHeight={thumbnail?.dimensions?.height}
           title={title}
           url={url}
-          colorText={linksColorText}
-          colorBackground={linksColorBackground}
         />
       ))}
     </ul>

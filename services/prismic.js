@@ -9,8 +9,7 @@ export const getDataByType = async (client, type) => {
 };
 
 export const getAllData = async (client) => {
-  const layout = await getDataByType(client, 'layout');
   const link = await getDataByType(client, 'link');
   const profile = await getDataByType(client, 'profile');
-  return { layout, link, profile };
+  return { link, profile };
 };

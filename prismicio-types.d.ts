@@ -137,17 +137,6 @@ export type LinkDocument<Lang extends string = string> =
  */
 interface ProfileDocumentData {
   /**
-   * Título field in *Perfil*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Raíza Souto
-   * - **API ID Path**: profile.title
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
    * @ do Instagram field in *Perfil*
    *
    * - **Field Type**: Text
@@ -168,6 +157,17 @@ interface ProfileDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   profile_image: prismic.ImageField<never>;
+
+  /**
+   * Título field in *Perfil*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Raíza Souto
+   * - **API ID Path**: profile.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
 
   /**
    * Descrição field in *Perfil*

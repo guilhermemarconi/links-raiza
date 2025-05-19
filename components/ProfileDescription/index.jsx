@@ -1,8 +1,10 @@
 import { RichText } from 'prismic-reactjs';
 
+import './styles.css';
+
 function ProfileDescription({ content }) {
   return (
-    <div>
+    <div className="description">
       <RichText render={content} />
     </div>
   );
