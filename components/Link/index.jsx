@@ -1,12 +1,4 @@
-function Link({
-  title,
-  url,
-  thumbnailUrl,
-  thumbnailWidth,
-  thumbnailHeight,
-  colorText,
-  colorBackground,
-}) {
+function Link({ title, url, thumbnailUrl, thumbnailWidth, thumbnailHeight }) {
   if (!title && !url) return null;
 
   return (
@@ -17,9 +9,7 @@ function Link({
         rel="noopener noreferrer"
         className="@container/link flex items-center p-4 font-bold rounded-lg bg-foreground text-background"
       >
-        <span className="flex-1 pr-4">
-          {title}
-        </span>
+        <span className="flex-1 pr-4">{title}</span>
 
         {thumbnailUrl ? (
           <img

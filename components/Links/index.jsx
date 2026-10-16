@@ -1,6 +1,6 @@
 import Link from '@/components/Link';
 
-function Links({ links, linksColorText, linksColorBackground }) {
+function Links({ links }) {
   if (!links || !links.length) return null;
 
   return (

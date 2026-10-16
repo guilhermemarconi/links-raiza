@@ -1,29 +1,43 @@
 {
-  "id": "layout",
-  "label": "Layout",
-  "repeatable": false,
-  "status": true,
   "format": "custom",
+  "id": "layout",
   "json": {
     "Main": {
       "document_title": {
-        "type": "Text",
         "config": {
           "label": "Título (deixa como está)"
-        }
+        },
+        "type": "Text"
+      },
+      "page_background_image": {
+        "config": {
+          "constraint": {},
+          "label": "Imagem de fundo da página",
+          "thumbnails": []
+        },
+        "type": "Image"
+      },
+      "page_background_color": {
+        "config": {
+          "label": "Cor de fundo da página"
+        },
+        "type": "Color"
       },
       "links_color_background": {
-        "type": "Color",
         "config": {
           "label": "Cor do fundo dos links"
-        }
+        },
+        "type": "Color"
       },
       "links_color_text": {
-        "type": "Color",
         "config": {
           "label": "Cor do texto dos links"
-        }
+        },
+        "type": "Color"
       }
     }
-  }
+  },
+  "label": "Layout",
+  "repeatable": false,
+  "status": true
 }

@@ -13,9 +13,7 @@ export default async function Page() {
   return (
     <>
       <Profile {...profile} />
-      <Links
-        links={links}
-      />
+      <Links links={links} />
     </>
   );
 }

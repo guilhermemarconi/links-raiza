@@ -1,44 +1,36 @@
 {
-  "id": "profile",
-  "label": "Perfil",
-  "repeatable": false,
-  "status": true,
   "format": "custom",
+  "id": "profile",
   "json": {
     "Main": {
       "instagram_profile": {
-        "type": "Text",
         "config": {
           "label": "@ do Instagram"
-        }
+        },
+        "type": "Text"
       },
       "profile_image": {
-        "type": "Image",
         "config": {
           "constraint": {
-            "width": 300,
-            "height": 300
+            "height": 300,
+            "width": 300
           },
-          "thumbnails": [],
-          "label": "Foto de perfil"
-        }
-      },
-      "title": {
-        "type": "Text",
-        "config": {
-          "label": "Título",
-          "placeholder": "Raíza Souto"
-        }
+          "label": "Foto de perfil",
+          "thumbnails": []
+        },
+        "type": "Image"
       },
       "description": {
-        "type": "StructuredText",
         "config": {
-          "label": "Descrição",
-          "placeholder": "",
           "allowTargetBlank": true,
+          "label": "Descrição",
           "multi": "paragraph,strong,em,hyperlink"
-        }
+        },
+        "type": "StructuredText"
       }
     }
-  }
+  },
+  "label": "Perfil",
+  "repeatable": false,
+  "status": true
 }

@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "singleQuote": true,
+  "ignorePatterns": [
+    ".tokensave",
+    ".next",
+    "out",
+    "build",
+    "pnpm-lock.yaml",
+    "prismicio-types.d.ts"
+  ]
+}
