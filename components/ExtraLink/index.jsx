@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import ExternalLink from '@/components/ExternalLink';
 
 function ExtraLink({ title, url, thumbnailUrl, thumbnailWidth, thumbnailHeight }) {
@@ -12,12 +14,13 @@ function ExtraLink({ title, url, thumbnailUrl, thumbnailWidth, thumbnailHeight }
         <span className="flex-1 pr-4">{title}</span>
 
         {thumbnailUrl ? (
-          <img
+          <Image
             src={thumbnailUrl}
             alt=""
             width={thumbnailWidth}
             height={thumbnailHeight}
-            className="hidden size-16 rounded-md @min-[200px]:block"
+            sizes="64px"
+            className="hidden size-16 rounded-md object-cover @min-[200px]:block"
             role="presentation"
           />
         ) : null}

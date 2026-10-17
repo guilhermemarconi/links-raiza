@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import ExternalLink from '@/components/ExternalLink';
 import { hasUrl } from '@/lib/content';
 
@@ -14,12 +16,12 @@ function Products({ products }) {
         {items.map(({ image, description, url }, index) => (
           <li key={`${url}-${index}`}>
             <ExternalLink href={url} className="block overflow-hidden rounded-xl bg-surface">
-              <img
+              <Image
                 src={image.url}
                 alt={description}
                 width={image.dimensions?.width}
                 height={image.dimensions?.height}
-                loading="lazy"
+                sizes="(min-width: 700px) 700px, 100vw"
                 className="block h-auto w-full"
               />
             </ExternalLink>
