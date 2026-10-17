@@ -26,7 +26,7 @@ Products are ordered by the editor, currently COLUNA → PILAR → Work Session,
 **In code**
 
 - Dark theme only: `#1a110b` background, `#f2dfd4` text, `#e3bfad` accent, `#281e17` surface, `#412b1f` text on accent.
-- EB Garamond for the name and headings, Sofia Pro elsewhere, under `app/fonts/`. A free sans stands in until the Sofia Pro files are supplied.
+- EB Garamond for the name and headings, Sofia Pro elsewhere, under `app/fonts/`. The Sofia Pro files (Light, Regular, Medium and Bold, `.woff`) have been supplied and are used as is; no stand-in font.
 - The background image, under `public/`.
 
 ## Considered options
