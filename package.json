@@ -2,30 +2,34 @@
   "name": "links-raiza",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@12.14.0",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "slicemachine": "start-slicemachine"
+    "lint": "oxlint",
+    "format": "oxfmt",
+    "test": "vitest run"
   },
   "dependencies": {
-    "@prismicio/client": "^7.8.0",
-    "@prismicio/next": "^2.0.1",
-    "@prismicio/react": "^3.2.1",
-    "next": "^15",
-    "prismic-reactjs": "^1.3.4",
-    "react": "^19",
-    "react-dom": "^19"
+    "@prismicio/client": "^7.22.3",
+    "@prismicio/next": "^2.3.4",
+    "@prismicio/react": "^3.5.1",
+    "next": "^16.4.2",
+    "posthog-js": "^1.438.12",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@slicemachine/adapter-next": "^0.3.74",
-    "@tailwindcss/postcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.1",
-    "prettier": "^3",
-    "slice-machine-ui": "^2.4.1",
-    "styled-components": "^6",
-    "tailwindcss": "^4"
+    "@tailwindcss/postcss": "^4.3.3",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@vitejs/plugin-react": "^6.1.2",
+    "jsdom": "^30.1.3",
+    "oxfmt": "^0.73.0",
+    "oxlint": "^1.88.0",
+    "tailwindcss": "^4.3.3",
+    "vitest": "^5.0.5"
   }
 }

@@ -4,6 +4,4 @@
   .description p {
     @apply my-4 text-pretty;
   }
-
-  .description a {}
 }

@@ -1,0 +1,5 @@
+{
+  "repositoryName": "linksraiza",
+  "libraries": ["./slices"],
+  "routes": []
+}

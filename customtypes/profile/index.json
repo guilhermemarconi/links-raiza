@@ -1,44 +1,60 @@
 {
-  "id": "profile",
-  "label": "Perfil",
-  "repeatable": false,
-  "status": true,
   "format": "custom",
+  "id": "profile",
   "json": {
     "Main": {
-      "instagram_profile": {
-        "type": "Text",
-        "config": {
-          "label": "@ do Instagram"
-        }
-      },
       "profile_image": {
-        "type": "Image",
         "config": {
           "constraint": {
-            "width": 300,
-            "height": 300
+            "height": 300,
+            "width": 300
           },
-          "thumbnails": [],
-          "label": "Foto de perfil"
-        }
+          "label": "Foto de perfil",
+          "thumbnails": []
+        },
+        "type": "Image"
       },
-      "title": {
-        "type": "Text",
+      "name": {
         "config": {
-          "label": "Título",
+          "label": "Nome",
           "placeholder": "Raíza Souto"
-        }
+        },
+        "type": "Text"
       },
       "description": {
-        "type": "StructuredText",
         "config": {
-          "label": "Descrição",
-          "placeholder": "",
           "allowTargetBlank": true,
+          "label": "Descrição",
           "multi": "paragraph,strong,em,hyperlink"
-        }
+        },
+        "type": "StructuredText"
+      }
+    },
+    "Metadados": {
+      "meta_title": {
+        "config": {
+          "label": "Título da página",
+          "placeholder": "Raíza Souto | Links"
+        },
+        "type": "Text"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Descrição da página"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {},
+          "label": "Imagem de compartilhamento",
+          "thumbnails": []
+        },
+        "type": "Image"
       }
     }
-  }
+  },
+  "label": "Perfil",
+  "repeatable": false,
+  "status": true
 }

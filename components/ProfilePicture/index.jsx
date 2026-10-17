@@ -1,11 +1,14 @@
+import Image from 'next/image';
+
 function ProfilePicture({ src, alt }) {
   return (
-    <img
+    <Image
       src={src}
       width={100}
       height={100}
       alt={alt}
-      className="block size-[100px] mx-auto rounded-full"
+      priority
+      className="block size-[100px] mx-auto rounded-full object-cover"
     />
   );
 }
