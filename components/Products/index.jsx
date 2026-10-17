@@ -15,7 +15,13 @@ function Products({ products }) {
       <ul className="m-0 flex list-none flex-col gap-5 p-0">
         {items.map(({ image, description, url }, index) => (
           <li key={`${url}-${index}`}>
-            <ExternalLink href={url} className="block overflow-hidden rounded-xl bg-surface">
+            <ExternalLink
+              href={url}
+              data-posthog-destination-kind="product"
+              data-posthog-destination-name={description}
+              data-posthog-destination-position={index + 1}
+              className="block overflow-hidden rounded-xl bg-surface"
+            >
               <Image
                 src={image.url}
                 alt={description}

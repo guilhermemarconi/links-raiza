@@ -2,6 +2,7 @@ import { EB_Garamond } from 'next/font/google';
 import localFont from 'next/font/local';
 import { PrismicPreview } from '@prismicio/next';
 
+import Analytics from '@/components/Analytics';
 import prismicConfig from '@/prismic.config.json';
 import './globals.css';
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
     <html lang="pt-BR" className={`${ebGaramond.variable} ${sofiaPro.variable}`}>
       <body className="antialiased">
         {children}
+        <Analytics />
         <PrismicPreview repositoryName={prismicConfig.repositoryName} />
       </body>
     </html>
