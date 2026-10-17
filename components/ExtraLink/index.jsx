@@ -1,12 +1,12 @@
-function Link({ title, url, thumbnailUrl, thumbnailWidth, thumbnailHeight }) {
+import ExternalLink from '@/components/ExternalLink';
+
+function ExtraLink({ title, url, thumbnailUrl, thumbnailWidth, thumbnailHeight }) {
   if (!title && !url) return null;
 
   return (
     <li className="block my-5">
-      <a
+      <ExternalLink
         href={url}
-        target="_blank"
-        rel="noopener noreferrer"
         className="@container/link flex items-center p-4 font-bold rounded-lg bg-accent text-on-accent"
       >
         <span className="flex-1 pr-4">{title}</span>
@@ -21,9 +21,9 @@ function Link({ title, url, thumbnailUrl, thumbnailWidth, thumbnailHeight }) {
             role="presentation"
           />
         ) : null}
-      </a>
+      </ExternalLink>
     </li>
   );
 }
 
-export default Link;
+export default ExtraLink;

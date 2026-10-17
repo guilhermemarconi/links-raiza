@@ -36,12 +36,12 @@ describe('Bio page', () => {
       expect(screen.getByRole('heading', { level: 1, name: 'Raíza Souto' })).toBeInTheDocument();
     });
 
-    it('renders the hero image as decorative', async () => {
+    it('renders the background image as decorative', async () => {
       await renderPage();
-      const hero = document.querySelector('img[src*="fundacao-01"]');
-      expect(hero).not.toBeNull();
-      expect(hero).toHaveAttribute('alt', '');
-      expect(hero).toHaveAttribute('aria-hidden', 'true');
+      const background = document.querySelector('img[src*="fundacao-01"]');
+      expect(background).not.toBeNull();
+      expect(background).toHaveAttribute('alt', '');
+      expect(background).toHaveAttribute('aria-hidden', 'true');
     });
   });
 
@@ -71,6 +71,25 @@ describe('Bio page', () => {
       expect(metadata.description).toBe(
         'Aqui você encontra todos os links para estarmos sempre juntos!',
       );
+    });
+  });
+
+  describe('metadata fallbacks', () => {
+    it('falls back to defaults when meta fields are empty strings', async () => {
+      getAllData.mockResolvedValue(
+        fixtures({ profile: [profileDoc({ meta_title: '', meta_description: '' })] }),
+      );
+      const metadata = await generateMetadata();
+      expect(metadata.title).toBe('Raíza Souto | Links');
+      expect(metadata.description).toBe(
+        'Aqui você encontra todos os links para estarmos sempre juntos!',
+      );
+    });
+
+    it('omits the share image when meta_image is empty', async () => {
+      getAllData.mockResolvedValue(fixtures({ profile: [profileDoc({ meta_image: {} })] }));
+      const metadata = await generateMetadata();
+      expect(metadata.openGraph).not.toHaveProperty('images');
     });
   });
 
@@ -108,6 +127,21 @@ describe('Bio page', () => {
       expect(screen.getByRole('link', { name: 'Descrição COLUNA' })).toBeInTheDocument();
     });
 
+    it('does not render a product without image', async () => {
+      const noImage = { ...product('Sem', 'https://sem.test'), image: {} };
+      await renderPage(fixtures({ products: [productsDoc([three[0], noImage])] }));
+      expect(screen.queryByRole('link', { name: 'Descrição Sem' })).not.toBeInTheDocument();
+      expect(screen.getAllByRole('img').filter((i) => !i.getAttribute('src'))).toHaveLength(0);
+      expect(screen.getByRole('link', { name: 'Descrição COLUNA' })).toBeInTheDocument();
+    });
+
+    it.each([null, '', undefined])('does not render a product with description %j', async (d) => {
+      const bad = { ...product('Mudo', 'https://mudo.test'), description: d };
+      await renderPage(fixtures({ products: [productsDoc([three[0], bad])] }));
+      const links = within(screen.getByRole('region', { name: 'Produtos' })).getAllByRole('link');
+      expect(links).toHaveLength(1);
+    });
+
     it('omits the section when no product is renderable', async () => {
       await renderPage(fixtures({ products: [productsDoc([product('Novo', null)])] }));
       expect(screen.queryByRole('region', { name: 'Produtos' })).not.toBeInTheDocument();
@@ -134,6 +168,48 @@ describe('Bio page', () => {
       expect(links[0]).toHaveAttribute('href', 'https://instagram.com/raizasouto');
     });
 
+    it('renders all four networks with name, target and rel', async () => {
+      const networks = ['Instagram', 'YouTube', 'TikTok', 'LinkedIn'];
+      await renderPage(
+        fixtures({
+          social_links: [
+            socialDoc(networks.map((network) => ({ network, url: `https://${network}.test` }))),
+          ],
+        }),
+      );
+      const region = screen.getByRole('region', { name: 'Redes sociais' });
+      for (const network of networks) {
+        const a = within(region).getByRole('link', { name: network });
+        expect(a).toHaveAttribute('href', `https://${network}.test`);
+        expect(a).toHaveAttribute('target', '_blank');
+        expect(a).toHaveAttribute('rel', 'noopener noreferrer');
+      }
+    });
+
+    it('ignores an unknown network', async () => {
+      await renderPage(
+        fixtures({ social_links: [socialDoc([{ network: 'Orkut', url: 'https://orkut.test' }])] }),
+      );
+      expect(screen.queryByRole('region', { name: 'Redes sociais' })).not.toBeInTheDocument();
+    });
+
+    it('renders the same network twice without key collisions', async () => {
+      const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      await renderPage(
+        fixtures({
+          social_links: [
+            socialDoc([
+              { network: 'Instagram', url: 'https://instagram.com/a' },
+              { network: 'Instagram', url: 'https://instagram.com/b' },
+            ]),
+          ],
+        }),
+      );
+      expect(screen.getAllByRole('link', { name: 'Instagram' })).toHaveLength(2);
+      expect(spy).not.toHaveBeenCalled();
+      spy.mockRestore();
+    });
+
     it('omits the section when no social link has a URL', async () => {
       await renderPage(
         fixtures({ social_links: [socialDoc([{ network: 'YouTube', url: null }])] }),
@@ -158,7 +234,7 @@ describe('Bio page', () => {
           ],
         }),
       );
-      const region = screen.getByRole('region', { name: 'Outros links' });
+      const region = screen.getByRole('region', { name: 'Links extras' });
       const podcast = within(region).getByRole('link', { name: 'Podcast' });
       const blog = within(region).getByRole('link', { name: 'Blog' });
       expect(podcast).toHaveAttribute('href', 'https://podcast.test');
@@ -166,9 +242,18 @@ describe('Bio page', () => {
       expect(blog.querySelector('img')).toBeNull();
     });
 
+    it('opens externally and safely', async () => {
+      await renderPage(
+        fixtures({ link: [linkDoc([{ title: 'Blog', url: 'https://blog.test', thumbnail: {} }])] }),
+      );
+      const a = screen.getByRole('link', { name: 'Blog' });
+      expect(a).toHaveAttribute('target', '_blank');
+      expect(a).toHaveAttribute('rel', 'noopener noreferrer');
+    });
+
     it('omits the section when there are no extra links', async () => {
       await renderPage();
-      expect(screen.queryByRole('region', { name: 'Outros links' })).not.toBeInTheDocument();
+      expect(screen.queryByRole('region', { name: 'Links extras' })).not.toBeInTheDocument();
     });
   });
 
@@ -181,6 +266,6 @@ describe('Bio page', () => {
       }),
     );
     const names = screen.getAllByRole('region').map((r) => r.getAttribute('aria-label'));
-    expect(names).toEqual(['Perfil', 'Redes sociais', 'Produtos', 'Outros links']);
+    expect(names).toEqual(['Perfil', 'Redes sociais', 'Produtos', 'Links extras']);
   });
 });

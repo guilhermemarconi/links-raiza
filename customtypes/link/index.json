@@ -1,49 +1,50 @@
 {
-  "format": "custom",
   "id": "link",
+  "label": "Link",
+  "repeatable": false,
+  "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "doc_title": {
+        "type": "Text",
         "config": {
           "label": "Título do documento (ignorar)",
           "placeholder": "Links"
-        },
-        "type": "Text"
+        }
       },
       "links": {
+        "type": "Group",
         "config": {
           "fields": {
             "thumbnail": {
+              "type": "Image",
               "config": {
-                "constraint": {
-                  "width": 676
-                },
                 "label": "Imagem",
+                "constraint": {
+                  "width": 300,
+                  "height": 300
+                },
                 "thumbnails": []
-              },
-              "type": "Image"
+              }
             },
             "title": {
+              "type": "Text",
               "config": {
                 "label": "Título"
-              },
-              "type": "Text"
+              }
             },
             "url": {
+              "type": "Text",
               "config": {
                 "label": "URL do link",
                 "placeholder": "https://"
-              },
-              "type": "Text"
+              }
             }
           },
           "label": "Links"
-        },
-        "type": "Group"
+        }
       }
     }
-  },
-  "label": "Link",
-  "repeatable": false,
-  "status": true
+  }
 }
