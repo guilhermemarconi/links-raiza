@@ -1,5 +1,6 @@
 allowBuilds:
   '@scarf/scarf': true
+  core-js: false
   unrs-resolver: true
 minimumReleaseAgeExclude:
   - '@next/env@16.4.2'
