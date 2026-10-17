@@ -1,5 +1,6 @@
 import ExternalLink from '@/components/ExternalLink';
 import { withUrl } from '@/lib/content';
+import { destinationProps, KIND } from '@/lib/destination';
 
 import { ICONS } from './icons';
 
@@ -15,9 +16,7 @@ function SocialLinks({ links }) {
             <ExternalLink
               href={url}
               aria-label={network}
-              data-posthog-destination-kind="social"
-              data-posthog-destination-name={network}
-              data-posthog-destination-position={index + 1}
+              {...destinationProps(KIND.social, network, index + 1)}
               className="flex size-11 items-center justify-center rounded-full bg-accent text-on-accent"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true" className="size-6">

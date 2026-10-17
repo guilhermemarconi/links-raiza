@@ -1,15 +1,16 @@
 import Image from 'next/image';
 
 import ExternalLink from '@/components/ExternalLink';
+import { destinationProps, KIND } from '@/lib/destination';
 
 function ExtraLink({ title, url, position, thumbnailUrl, thumbnailWidth, thumbnailHeight }) {
+  if (!title && !url) return null;
+
   return (
     <li className="block my-5">
       <ExternalLink
         href={url}
-        data-posthog-destination-kind="extra"
-        data-posthog-destination-name={title}
-        data-posthog-destination-position={position}
+        {...(url ? destinationProps(KIND.extra, title, position) : {})}
         className="@container/link flex items-center p-4 font-bold rounded-lg bg-accent text-on-accent"
       >
         <span className="flex-1 pr-4">{title}</span>

@@ -1,11 +1,12 @@
 import ExtraLink from '@/components/ExtraLink';
-
-// An Extra link with neither title nor URL is registered but never shown.
-const isRenderable = ({ title, url }) => title || url;
+import { isExtraRenderable } from '@/lib/content';
 
 function ExtraLinks({ links }) {
-  const items = (links ?? []).filter(isRenderable);
+  const items = (links ?? []).filter(isExtraRenderable);
   if (!items.length) return null;
+
+  // Only items with a destination are measured, so only they consume a position.
+  let position = 0;
 
   return (
     <section aria-label="Links extras" className="my-6">
@@ -13,7 +14,7 @@ function ExtraLinks({ links }) {
         {items.map(({ thumbnail, title, url }, index) => (
           <ExtraLink
             key={`${url ?? title}-${index}`}
-            position={index + 1}
+            position={url ? ++position : undefined}
             thumbnailUrl={thumbnail?.url}
             thumbnailWidth={thumbnail?.dimensions?.width}
             thumbnailHeight={thumbnail?.dimensions?.height}

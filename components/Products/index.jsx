@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import ExternalLink from '@/components/ExternalLink';
 import { hasUrl } from '@/lib/content';
+import { destinationProps, KIND } from '@/lib/destination';
 
 // A card needs a destination, its image (the pitch) and a description (its only accessible name).
 const isRenderable = (product) => hasUrl(product) && product.image?.url && product.description;
@@ -17,9 +18,7 @@ function Products({ products }) {
           <li key={`${url}-${index}`}>
             <ExternalLink
               href={url}
-              data-posthog-destination-kind="product"
-              data-posthog-destination-name={description}
-              data-posthog-destination-position={index + 1}
+              {...destinationProps(KIND.product, description, index + 1)}
               className="block overflow-hidden rounded-xl bg-surface"
             >
               <Image
