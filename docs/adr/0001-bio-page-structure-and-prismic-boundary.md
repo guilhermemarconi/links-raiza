@@ -10,7 +10,7 @@ The app becomes a single-page Bio page (`/`) modelled on comunicandometodo.com.b
 
 Top to bottom: Profile (photo, name "Raíza Souto", short description, over the `fundacao-01` hero image at 20% opacity fading into the background), Social links, Product cards, Extra links. One route, all destinations external, no per-product pages, no UTM parameters, no contact section, no prices.
 
-Products are ordered by the editor, currently COLUNA → PILAR → Work Session, and all carry equal weight. COLUNA links to `https://raizasouto.com.br`; Work Session links to a WhatsApp URL with a prefilled, URL-encoded message; PILAR has no link yet.
+Products are ordered by the editor, currently COLUNA → PILAR → Work Session, and all carry equal weight. COLUNA links to `https://raizasouto.com.br`; Work Session and PILAR link to the same WhatsApp number, each with its own prefilled, URL-encoded message (PILAR: "Olá, tenho interesse no PILAR. Poderia me dar mais informações?").
 
 ## Boundary
 
@@ -40,4 +40,4 @@ Products are ordered by the editor, currently COLUNA → PILAR → Work Session,
 - Changing the palette, fonts or background requires a code change and deploy.
 - The existing Instagram handle field is replaced by the Social links list, so Instagram must be re-entered as a URL.
 - Highlighting one Product over the others is deferred, not decided. Revisit before building any emphasis style.
-- The PILAR link is undefined; its card stays hidden until it is filled in.
+- The PILAR and Work Session links share a WhatsApp number; if that number changes, both URLs must be updated in Prismic.
