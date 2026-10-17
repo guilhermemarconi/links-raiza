@@ -33,3 +33,8 @@ _Avoid_: Link (alone, ambiguous with a Product card's destination), button
 
 **Social link**: a link to Raíza's presence on a social network, shown as an icon. The networks are Instagram, YouTube, TikTok and LinkedIn; only Instagram has an address today.
 _Avoid_: Social icon, network button
+
+### Measurement
+
+**Destination click**: a visitor's click on a Product card, a Social link or an Extra link. It is the only interaction the Bio page measures, together with the page view.
+_Avoid_: Conversion (nothing is bought on the page), hit
