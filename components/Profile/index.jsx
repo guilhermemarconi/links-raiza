@@ -2,15 +2,15 @@ import Image from 'next/image';
 
 import ProfilePicture from '@/components/ProfilePicture';
 import ProfileDescription from '@/components/ProfileDescription';
+import { DEFAULT_NAME } from '@/lib/defaults';
 
-export const DEFAULT_NAME = 'Raíza Souto';
 
 function Profile({ profile_image, name, description }) {
   return (
     <section aria-label="Perfil" className="relative text-center">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-[-1.875rem] left-1/2 -z-10 h-[32rem] w-screen -translate-x-1/2 opacity-20 [mask-image:linear-gradient(to_bottom,black_40%,transparent)]"
+        className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[32rem] opacity-20 [mask-image:linear-gradient(to_bottom,black_40%,transparent)]"
       >
         <Image
           src="/fundacao-01.webp"
