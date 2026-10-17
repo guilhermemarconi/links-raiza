@@ -1,0 +1,47 @@
+{
+  "format": "custom",
+  "id": "products",
+  "json": {
+    "Main": {
+      "products": {
+        "config": {
+          "fields": {
+            "name": {
+              "config": {
+                "label": "Nome interno",
+                "placeholder": "COLUNA"
+              },
+              "type": "Text"
+            },
+            "image": {
+              "config": {
+                "constraint": {},
+                "label": "Imagem do card",
+                "thumbnails": []
+              },
+              "type": "Image"
+            },
+            "description": {
+              "config": {
+                "label": "Descrição (obrigatória, usada como texto alternativo da imagem)"
+              },
+              "type": "Text"
+            },
+            "url": {
+              "config": {
+                "label": "URL (sem URL, o card não aparece)",
+                "placeholder": "https://"
+              },
+              "type": "Text"
+            }
+          },
+          "label": "Produtos (a ordem aqui é a ordem na página)"
+        },
+        "type": "Group"
+      }
+    }
+  },
+  "label": "Produtos",
+  "repeatable": false,
+  "status": true
+}

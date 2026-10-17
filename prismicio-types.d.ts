@@ -47,77 +47,6 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 /**
- * Content for Layout documents
- */
-interface LayoutDocumentData {
-	/**
-	 * Título (deixa como está) field in *Layout*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: layout.document_title
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/text
-	 */
-	document_title: prismic.KeyTextField;
-	
-	/**
-	 * Imagem de fundo da página field in *Layout*
-	 *
-	 * - **Field Type**: Image
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: layout.page_background_image
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/image
-	 */
-	page_background_image: prismic.ImageField<never>;
-	
-	/**
-	 * Cor de fundo da página field in *Layout*
-	 *
-	 * - **Field Type**: Color
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: layout.page_background_color
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/color
-	 */
-	page_background_color: prismic.ColorField;
-	
-	/**
-	 * Cor do fundo dos links field in *Layout*
-	 *
-	 * - **Field Type**: Color
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: layout.links_color_background
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/color
-	 */
-	links_color_background: prismic.ColorField;
-	
-	/**
-	 * Cor do texto dos links field in *Layout*
-	 *
-	 * - **Field Type**: Color
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: layout.links_color_text
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/color
-	 */
-	links_color_text: prismic.ColorField;
-}
-
-/**
- * Layout document from Prismic
- *
- * - **API ID**: `layout`
- * - **Repeatable**: `false`
- * - **Documentation**: https://prismic.io/docs/content-modeling
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type LayoutDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<LayoutDocumentData>, "layout", Lang>;
-
-/**
  * Item in *Link → Links*
  */
 export interface LinkDocumentDataLinksItem {
@@ -195,17 +124,6 @@ export type LinkDocument<Lang extends string = string> = prismic.PrismicDocument
  */
 interface ProfileDocumentData {
 	/**
-	 * @ do Instagram field in *Perfil*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: profile.instagram_profile
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/text
-	 */
-	instagram_profile: prismic.KeyTextField;
-	
-	/**
 	 * Foto de perfil field in *Perfil*
 	 *
 	 * - **Field Type**: Image
@@ -215,7 +133,18 @@ interface ProfileDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/image
 	 */
 	profile_image: prismic.ImageField<never>;
-	
+
+	/**
+	 * Nome field in *Perfil*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Raíza Souto
+	 * - **API ID Path**: profile.name
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	name: prismic.KeyTextField;
+
 	/**
 	 * Descrição field in *Perfil*
 	 *
@@ -226,6 +155,39 @@ interface ProfileDocumentData {
 	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
 	 */
 	description: prismic.RichTextField;
+
+	/**
+	 * Título da página field in *Perfil*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: Raíza Souto | Links
+	 * - **API ID Path**: profile.meta_title
+	 * - **Tab**: Metadados
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	meta_title: prismic.KeyTextField;
+
+	/**
+	 * Descrição da página field in *Perfil*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: profile.meta_description
+	 * - **Tab**: Metadados
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	meta_description: prismic.KeyTextField;
+
+	/**
+	 * Imagem de compartilhamento field in *Perfil*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: profile.meta_image
+	 * - **Tab**: Metadados
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	meta_image: prismic.ImageField<never>;
 }
 
 /**
@@ -239,7 +201,137 @@ interface ProfileDocumentData {
  */
 export type ProfileDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<ProfileDocumentData>, "profile", Lang>;
 
-export type AllDocumentTypes = LayoutDocument | LinkDocument | ProfileDocument;
+/**
+ * Item in *Produtos → Produtos (a ordem aqui é a ordem na página)*
+ */
+export interface ProductsDocumentDataProductsItem {
+	/**
+	 * Nome interno field in *Produtos → Produtos*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: COLUNA
+	 * - **API ID Path**: products.products[].name
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	name: prismic.KeyTextField;
+
+	/**
+	 * Imagem do card field in *Produtos → Produtos*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: products.products[].image
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	image: prismic.ImageField<never>;
+
+	/**
+	 * Descrição (obrigatória, usada como texto alternativo da imagem) field in *Produtos → Produtos*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: products.products[].description
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	description: prismic.KeyTextField;
+
+	/**
+	 * URL (sem URL, o card não aparece) field in *Produtos → Produtos*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: https://
+	 * - **API ID Path**: products.products[].url
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	url: prismic.KeyTextField;
+}
+
+/**
+ * Content for Produtos documents
+ */
+interface ProductsDocumentData {
+	/**
+	 * Produtos (a ordem aqui é a ordem na página) field in *Produtos*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: products.products[]
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+	 */
+	products: prismic.GroupField<Simplify<ProductsDocumentDataProductsItem>>;
+}
+
+/**
+ * Produtos document from Prismic
+ *
+ * - **API ID**: `products`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ProductsDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<ProductsDocumentData>, "products", Lang>;
+
+/**
+ * Item in *Redes sociais → Redes sociais*
+ */
+export interface SocialLinksDocumentDataSocialLinksItem {
+	/**
+	 * Rede field in *Redes sociais → Redes sociais*
+	 *
+	 * - **Field Type**: Select
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: social_links.social_links[].network
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/select
+	 */
+	network: prismic.SelectField<"Instagram" | "YouTube" | "TikTok" | "LinkedIn", "filled">;
+
+	/**
+	 * URL (sem URL, o ícone não aparece) field in *Redes sociais → Redes sociais*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: https://
+	 * - **API ID Path**: social_links.social_links[].url
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	url: prismic.KeyTextField;
+}
+
+/**
+ * Content for Redes sociais documents
+ */
+interface SocialLinksDocumentData {
+	/**
+	 * Redes sociais field in *Redes sociais*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: social_links.social_links[]
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+	 */
+	social_links: prismic.GroupField<Simplify<SocialLinksDocumentDataSocialLinksItem>>;
+}
+
+/**
+ * Redes sociais document from Prismic
+ *
+ * - **API ID**: `social_links`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SocialLinksDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<SocialLinksDocumentData>, "social_links", Lang>;
+
+export type AllDocumentTypes = LinkDocument | ProductsDocument | ProfileDocument | SocialLinksDocument;
 
 declare module "@prismicio/client" {
 	interface CreateClient {
@@ -256,8 +348,6 @@ declare module "@prismicio/client" {
 	
 	namespace Content {
 		export type {
-			LayoutDocument,
-			LayoutDocumentData,
 			LinkDocument,
 			LinkDocumentData,
 			LinkDocumentDataLinksItem,

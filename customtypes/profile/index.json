@@ -3,12 +3,6 @@
   "id": "profile",
   "json": {
     "Main": {
-      "instagram_profile": {
-        "config": {
-          "label": "@ do Instagram"
-        },
-        "type": "Text"
-      },
       "profile_image": {
         "config": {
           "constraint": {
@@ -20,6 +14,13 @@
         },
         "type": "Image"
       },
+      "name": {
+        "config": {
+          "label": "Nome",
+          "placeholder": "Raíza Souto"
+        },
+        "type": "Text"
+      },
       "description": {
         "config": {
           "allowTargetBlank": true,
@@ -27,6 +28,29 @@
           "multi": "paragraph,strong,em,hyperlink"
         },
         "type": "StructuredText"
+      }
+    },
+    "Metadados": {
+      "meta_title": {
+        "config": {
+          "label": "Título da página",
+          "placeholder": "Raíza Souto | Links"
+        },
+        "type": "Text"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Descrição da página"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {},
+          "label": "Imagem de compartilhamento",
+          "thumbnails": []
+        },
+        "type": "Image"
       }
     }
   },

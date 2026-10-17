@@ -1,0 +1,34 @@
+{
+  "format": "custom",
+  "id": "social_links",
+  "json": {
+    "Main": {
+      "social_links": {
+        "config": {
+          "fields": {
+            "network": {
+              "config": {
+                "default_value": "Instagram",
+                "label": "Rede",
+                "options": ["Instagram", "YouTube", "TikTok", "LinkedIn"]
+              },
+              "type": "Select"
+            },
+            "url": {
+              "config": {
+                "label": "URL (sem URL, o ícone não aparece)",
+                "placeholder": "https://"
+              },
+              "type": "Text"
+            }
+          },
+          "label": "Redes sociais"
+        },
+        "type": "Group"
+      }
+    }
+  },
+  "label": "Redes sociais",
+  "repeatable": false,
+  "status": true
+}
