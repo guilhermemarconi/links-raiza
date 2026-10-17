@@ -3,18 +3,23 @@
 import posthog from 'posthog-js';
 import { useEffect } from 'react';
 
+import { ATTR } from '@/lib/destination';
+
 // Delegated listener: a measured link only needs the data-posthog-destination-* attributes (ADR 0002).
 function captureDestinationClick(event) {
   try {
     if (!(event.target instanceof Element)) return;
 
-    const destination = event.target.closest('[data-posthog-destination-kind]');
+    // Primary click and middle button count; right button (auxclick 2) does not.
+    if (event.type === 'auxclick' && event.button !== 1) return;
+
+    const destination = event.target.closest(`[${ATTR.kind}]`);
     if (!destination) return;
 
     posthog.capture('destination_clicked', {
-      kind: destination.dataset.posthogDestinationKind,
-      name: destination.dataset.posthogDestinationName,
-      position: Number(destination.dataset.posthogDestinationPosition),
+      kind: destination.getAttribute(ATTR.kind),
+      name: destination.getAttribute(ATTR.name),
+      position: Number(destination.getAttribute(ATTR.position)),
     });
   } catch {
     // Measurement must never block navigation.
@@ -33,6 +38,7 @@ function Analytics() {
         persistence: 'memory',
         autocapture: false,
         disable_session_recording: true,
+        person_profiles: 'identified_only',
       });
     } catch {
       return;

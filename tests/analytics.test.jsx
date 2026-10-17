@@ -33,6 +33,9 @@ const renderPage = async (data = fixtures()) => {
 const middleClick = (element) =>
   fireEvent(element, new MouseEvent('auxclick', { bubbles: true, button: 1 }));
 
+const rightClick = (element) =>
+  fireEvent(element, new MouseEvent('auxclick', { bubbles: true, button: 2 }));
+
 const withEverything = () =>
   fixtures({
     products: [
@@ -122,6 +125,12 @@ describe('Destination click measurement', () => {
     });
   });
 
+  it('does not count right-button clicks', async () => {
+    await renderPage(withEverything());
+    rightClick(screen.getByRole('link', { name: 'Podcast' }));
+    expect(posthog.capture).not.toHaveBeenCalled();
+  });
+
   it('emits nothing when clicking something that is not a measured link', async () => {
     await renderPage(withEverything());
     fireEvent.click(screen.getByRole('heading', { level: 1 }));
@@ -149,13 +158,73 @@ describe('Destination click measurement', () => {
     link.remove();
   });
 
-  it('does not block clicks when capturing fails', async () => {
+  it('does not surface an error when capturing fails', async () => {
     posthog.capture.mockImplementationOnce(() => {
       throw new Error('boom');
     });
+    const errors = [];
+    const onError = (event) => {
+      event.preventDefault();
+      errors.push(event.error);
+    };
+    window.addEventListener('error', onError);
+    try {
+      await renderPage(withEverything());
+      fireEvent.click(screen.getByRole('link', { name: 'Blog' }));
+    } finally {
+      window.removeEventListener('error', onError);
+    }
+    expect(posthog.capture).toHaveBeenCalledOnce();
+    expect(errors).toEqual([]);
+  });
+
+  it('keeps the page and links working when posthog.init throws', async () => {
+    posthog.init.mockImplementationOnce(() => {
+      throw new Error('blocked');
+    });
     await renderPage(withEverything());
     const link = screen.getByRole('link', { name: 'Blog' });
-    expect(() => fireEvent.click(link)).not.toThrow();
+    expect(link).toHaveAttribute('href', 'https://blog.test');
+    fireEvent.click(link);
+    middleClick(link);
+    expect(posthog.capture).not.toHaveBeenCalled();
+  });
+
+  it('does not render or count a Social link with an unknown network', async () => {
+    const data = withEverything();
+    data.social_links = [
+      socialDoc([
+        { network: 'Orkut', url: 'https://orkut.test' },
+        { network: 'Instagram', url: 'https://instagram.com/x' },
+      ]),
+    ];
+    await renderPage(data);
+    expect(screen.queryByRole('link', { name: 'Orkut' })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('link', { name: 'Instagram' }));
+    expect(posthog.capture).toHaveBeenCalledExactlyOnceWith('destination_clicked', {
+      kind: 'social',
+      name: 'Instagram',
+      position: 1,
+    });
+  });
+
+  it('does not count an Extra link without URL nor let it shift positions', async () => {
+    const data = withEverything();
+    data.link = [
+      linkDoc([
+        { title: 'Sem destino', url: null, thumbnail: {} },
+        { title: 'Podcast', url: 'https://podcast.test', thumbnail: {} },
+      ]),
+    ];
+    await renderPage(data);
+    fireEvent.click(screen.getByText('Sem destino'));
+    expect(posthog.capture).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole('link', { name: 'Podcast' }));
+    expect(posthog.capture).toHaveBeenCalledExactlyOnceWith('destination_clicked', {
+      kind: 'extra',
+      name: 'Podcast',
+      position: 1,
+    });
   });
 
   it('initialises cookieless, without autocapture, replay or identify', async () => {
@@ -167,8 +236,10 @@ describe('Destination click measurement', () => {
         persistence: 'memory',
         autocapture: false,
         disable_session_recording: true,
+        person_profiles: 'identified_only',
       }),
     );
+    expect(posthog.init.mock.calls[0][1].capture_pageview).not.toBe(false);
     expect(posthog.init.mock.calls[0][1]).not.toHaveProperty('capture_exceptions');
     expect(posthog.identify).not.toHaveBeenCalled();
   });
