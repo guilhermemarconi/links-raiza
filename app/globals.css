@@ -1,26 +1,35 @@
 @import 'tailwindcss';
 
 :root {
-  --brand-900: #ffffff;
-  --brand-100: #2e2c2d;
-  --background: light-dark(var(--brand-900), var(--brand-100));
-  --foreground: light-dark(var(--brand-100), var(--brand-900));
+  color-scheme: dark;
+  --background: #1a110b;
+  --foreground: #f2dfd4;
+  --accent: #e3bfad;
+  --surface: #281e17;
+  --on-accent: #412b1f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-brand-900: var(--brand-900);
-  --color-brand-100: var(--brand-100);
+  --color-accent: var(--accent);
+  --color-surface: var(--surface);
+  --color-on-accent: var(--on-accent);
+  --font-heading: var(--font-heading), Georgia, serif;
+  --font-sans: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 body {
   max-width: 43.75rem;
   margin-inline: auto;
   padding: 1.875rem;
+  overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-    'Helvetica Neue', Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
