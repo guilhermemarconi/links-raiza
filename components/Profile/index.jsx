@@ -1,16 +1,35 @@
+import Image from 'next/image';
+
 import ProfilePicture from '@/components/ProfilePicture';
 import ProfileDescription from '@/components/ProfileDescription';
 
-function Profile({ profile_image, title, description }) {
-  if (!profile_image && !description) return null;
+export const DEFAULT_NAME = 'Raíza Souto';
 
+function Profile({ profile_image, name, description }) {
   return (
-    <section aria-label="Perfil" className="[&>p]:my-4 [&_strong]:font-bold [&_em]:italic">
-      {profile_image ? <ProfilePicture src={profile_image.url} alt={profile_image.alt} /> : null}
+    <section aria-label="Perfil" className="relative text-center">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-[-1.875rem] left-1/2 -z-10 h-[32rem] w-screen -translate-x-1/2 opacity-20 [mask-image:linear-gradient(to_bottom,black_40%,transparent)]"
+      >
+        <Image
+          src="/fundacao-01.webp"
+          alt=""
+          aria-hidden="true"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-top"
+        />
+      </div>
 
-      {!!title && <h1 className="mb-6 font-bold text-6xl">{title}</h1>}
+      {profile_image?.url ? (
+        <ProfilePicture src={profile_image.url} alt={profile_image.alt ?? ''} />
+      ) : null}
 
-      {description ? <ProfileDescription content={description} /> : null}
+      <h1 className="mt-6 mb-4 font-heading font-semibold text-5xl">{name || DEFAULT_NAME}</h1>
+
+      {description?.length ? <ProfileDescription content={description} /> : null}
     </section>
   );
 }

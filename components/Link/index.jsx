@@ -7,7 +7,7 @@ function Link({ title, url, thumbnailUrl, thumbnailWidth, thumbnailHeight }) {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="@container/link flex items-center p-4 font-bold rounded-lg bg-foreground text-background"
+        className="@container/link flex items-center p-4 font-bold rounded-lg bg-accent text-on-accent"
       >
         <span className="flex-1 pr-4">{title}</span>
 
